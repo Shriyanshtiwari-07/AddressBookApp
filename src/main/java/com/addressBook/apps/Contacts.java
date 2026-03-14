@@ -1,14 +1,14 @@
 package com.addressBook.apps;
 
 public class Contacts {
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String state;
-    private int zip;
-    private String phoneNo;
-    private String email;
+     private String firstName;
+     private String lastName;
+     private String address;
+     private String city;
+     private String state;
+     private int zip;
+     private String phoneNo;
+     private String email;
 	 public Contacts(String firstName, String lastName, String address, String city, String state, int zip,
 			String phoneNo, String email) {
 		super();
@@ -74,6 +74,6 @@ public class Contacts {
 		return "Contacts [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
 				+ ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNo + ", email=" + email + "]";
 	 }
-    
-    
+     
+     
 }
