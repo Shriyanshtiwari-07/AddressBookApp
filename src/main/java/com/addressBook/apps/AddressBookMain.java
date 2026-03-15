@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-
 public class AddressBookMain {
 	static Map<String,AddressBook> addressBook =new HashMap<>();
 	
@@ -102,6 +101,21 @@ public class AddressBookMain {
 		}
 		return list;
 	}
+	
+	public static Map<String,Integer> countByCity(String addressBookName){
+		addressBookName = addressBookName.toLowerCase();
+		AddressBook ad = addressBook.get(addressBookName);
+		
+		return ad.countByCity();
+	}
+	
+	public static Map<String,Integer> countByState(String addressBookName){
+		addressBookName = addressBookName.toLowerCase();
+		AddressBook ad = addressBook.get(addressBookName);
+		
+		return ad.countByState();
+	}
+	
     public static void main(String[] args ) throws IOException{
         addAddress("Book1");
         
@@ -125,9 +139,15 @@ public class AddressBookMain {
         System.out.println(viewContact("book1"));
         System.out.println("\n");
         
-        System.out.println("MapByCity : "+getMapByCity("book1"));
+        addContacts("Book1","lucky:pal:berkhera:bhopal:MP:12345:83056144536:pallucky936@gmail.com");
+        
+        System.out.println("\nMapByCity : "+getMapByCity("book1"));
         System.out.println("\n");
         System.out.println("MapByState : "+getMapByState("Book1"));
+        
+        System.out.println("\nCount people in city addressBook 1 : "+countByCity("Book1")); 
+        System.out.println("\nCount people in state in addressBook 1 : "+countByState("Book1"));
+        
         
     }
     
