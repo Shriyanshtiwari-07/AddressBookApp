@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+
 public class AddressBook {
 	   private String addressBookName;
 	   private  List<Contacts> contacts = new ArrayList<>();
@@ -192,5 +193,9 @@ public class AddressBook {
 	   public Map<String,Integer> countByState(){
 		   return mapByState.entrySet().stream().collect(Collectors.toMap(a->a.getKey(),a->a.getValue().size()));
 	   }
-	
+	   
+	   public List<Contacts> sortByName() {
+		   return contacts.stream().sorted(Comparator.comparing(Contacts::getFirstName).thenComparing(Comparator.comparing(Contacts::getLastName))).toList();
+	   }
+	   
 }
