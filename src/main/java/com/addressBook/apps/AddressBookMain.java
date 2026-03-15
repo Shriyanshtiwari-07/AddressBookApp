@@ -1,7 +1,5 @@
 package com.addressBook.apps;
 
-
-
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -14,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
 
 public class AddressBookMain {
 	static Map<String,AddressBook> addressBook =new HashMap<>();
@@ -165,6 +164,16 @@ public class AddressBookMain {
 		AddressBook ad = addressBook.get(addressBookName);
 		ad.writeInCsvFile(path);
 	}
+	public static void readJSONFile(String addressBookName,String path) throws Exception{
+		addressBookName = addressBookName.toLowerCase();
+		AddressBook ad = addressBook.get(addressBookName);
+		ad.readJsonFile(path);
+	}
+	public static void writeJSONFile(String addressBookName,String path) throws Exception{
+		addressBookName = addressBookName.toLowerCase();
+		AddressBook ad = addressBook.get(addressBookName);
+		ad.writeJsonFile(path);
+	}
     public static void main(String[] args ) throws Exception{
       
         
@@ -191,7 +200,8 @@ public class AddressBookMain {
         System.out.println(viewContact("book1"));
         System.out.println("\n");
         
-        addContacts("Book1","lucky,pal,berkhera,bhopal,MP,12345,83056144536,pallucky936@gmail.com");
+        readJSONFile("Book1", "contact.json");
+        writeJSONFile("Book1","contactOutput.json");
         
         System.out.println("\nMapByCity : "+getMapByCity("book1"));
         System.out.println("\n");
