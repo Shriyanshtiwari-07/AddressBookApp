@@ -1,6 +1,5 @@
 package com.addressBook.apps;
 
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -198,4 +197,15 @@ public class AddressBook {
 		   return contacts.stream().sorted(Comparator.comparing(Contacts::getFirstName).thenComparing(Comparator.comparing(Contacts::getLastName))).toList();
 	   }
 	   
+	   public List<Contacts> sortByCity(){
+		   return contacts.stream().sorted(Comparator.comparing(Contacts::getCity)).toList();
+	   }
+	   
+	   public List<Contacts> sortByState(){
+		   return contacts.stream().sorted(Comparator.comparing(Contacts::getState)).toList();
+	   }
+	   
+	   public List<Contacts> sortByZipCode(){
+		   return contacts.stream().sorted(Comparator.comparing(Contacts::getZip)).toList();
+	   }
 }
