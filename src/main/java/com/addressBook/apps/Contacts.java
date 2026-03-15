@@ -1,5 +1,6 @@
 package com.addressBook.apps;
 
+
 public class Contacts {
      private String firstName;
      private String lastName;
@@ -72,7 +73,7 @@ public class Contacts {
 	 @Override
 	 public String toString() {
 		return "Contacts [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
-				+ ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNo + ", email=" + email + "]";
+				+ ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNo + ", email=" + email + "]\n";
 	 }
      
 	 //Override the equals method to compare full name
