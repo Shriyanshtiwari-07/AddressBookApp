@@ -1,5 +1,7 @@
 package com.addressBook.apps;
 
+
+
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -12,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
 
 public class AddressBookMain {
 	static Map<String,AddressBook> addressBook =new HashMap<>();
@@ -152,11 +153,24 @@ public class AddressBookMain {
 		   System.out.println("File unable to write");
 		}
 	}
-    public static void main(String[] args ) throws IOException{
+	
+	public static void readCSVFile(String addressBookName,String path) throws Exception{
+		addressBookName = addressBookName.toLowerCase();
+		AddressBook ad = addressBook.get(addressBookName);
+		ad.readCSVFile(path);
+	}
+	
+	public static void writeCSVFile(String addressBookName,String path) throws Exception{
+		addressBookName = addressBookName.toLowerCase();
+		AddressBook ad = addressBook.get(addressBookName);
+		ad.writeInCsvFile(path);
+	}
+    public static void main(String[] args ) throws Exception{
       
         
         BufferedReader read = new BufferedReader(new FileReader("input.txt"));
-        String addresBookName = read.readLine();
+        
+        String addresBookName = "book1";
         addAddress(addresBookName);
         String line;
         while((line=read.readLine())!=null) {
@@ -177,7 +191,7 @@ public class AddressBookMain {
         System.out.println(viewContact("book1"));
         System.out.println("\n");
         
-        addContacts("Book1","lucky:pal:berkhera:bhopal:MP:12345:83056144536:pallucky936@gmail.com");
+        addContacts("Book1","lucky,pal,berkhera,bhopal,MP,12345,83056144536,pallucky936@gmail.com");
         
         System.out.println("\nMapByCity : "+getMapByCity("book1"));
         System.out.println("\n");
@@ -192,6 +206,10 @@ public class AddressBookMain {
         System.out.println("\nsorted by zip  : "+sortByZipCode("book1"));
         
         writeFileData(addresBookName,"output.txt");
+        
+        readCSVFile("Book1","input.txt" );
+        writeCSVFile("book1", "outputCSV.txt");
+        
     }
     
 }
