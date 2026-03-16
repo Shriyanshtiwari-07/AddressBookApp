@@ -1,6 +1,5 @@
 package com.addressBook.apps;
 
-
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,6 +14,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.addressBook.apps.model.Contacts;
+import com.addressBook.database.SQLOperation;
 import com.google.gson.Gson;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -77,7 +77,7 @@ public class AddressBook {
 	         
 	         
 	    	contacts.add(con);
-	    	
+	    	addToDatabase(con);
 	    	
 	    	mapByName.put(key,con);
 	    	
@@ -113,7 +113,7 @@ public class AddressBook {
 	         
 	    	contacts.add(con);
 	    	
-	    	
+	    	addToDatabase(con);
 	    	mapByName.put(key,con);
 	    	
 	    	key = con.getCity().toLowerCase();
@@ -153,7 +153,7 @@ public class AddressBook {
 	         
 	         
 	    	contacts.add(con);
-	    	
+	    	addToDatabase(con);
 	    	
 	    	mapByName.put(key,con);
 	    	
@@ -397,5 +397,19 @@ public class AddressBook {
 		   gson.toJson(contacts,write);
 		   write.close();
 	   }
-	  
-}}
+	   public void addToDatabase(Contacts c) {
+		   try {
+			   SQLOperation.add(c,this.addressBookName);
+		   }catch(Exception e) {
+			   System.out.println(e.getMessage());
+		   }
+	   }
+	  public List<Contacts> getAllRecordsFromDatabase(){
+		  try {
+			  return SQLOperation.getAll(addressBookName);
+		  }catch(Exception e) {
+			  System.out.println(e.getMessage());
+		  }
+		  return null;
+	  }
+}
