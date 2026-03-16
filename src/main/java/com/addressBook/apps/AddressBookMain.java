@@ -1,7 +1,5 @@
 package com.addressBook.apps;
 
-
-
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -14,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
 
 public class AddressBookMain {
 	static Map<String,AddressBook> addressBook =new HashMap<>();
@@ -257,6 +256,7 @@ public class AddressBookMain {
 		}
 		return null;
 	}
+	
     public static void main(String[] args ) throws Exception{
       
         
@@ -265,6 +265,7 @@ public class AddressBookMain {
         	System.out.println("Enter 1 to Add addressBook : ");
         	System.out.println("Enter 2 to Add Contacts    : ");
         	System.out.println("Enter 3 to view Contacts in database : ");
+        	System.out.println("Enter 4 to Update Exiting details :");
         	int a = Integer.parseInt(read.readLine());
         	if(a==1) {
         		System.out.println("Enter Address Book Name : ");
@@ -282,8 +283,15 @@ public class AddressBookMain {
         	    for(Contacts c: getAllContacts(addBook)) {
         	    	System.out.println(c.toString());
         	    }
+        	}else if(a==4) {
+        		System.out.println("Enter AddressBook Name : ");
+        		String addressBookName = read.readLine();
+        		System.out.println("Enter the first Name : ");
+        		String name = read.readLine();
+        		System.out.println("Enter Updated Details as [first_name,last_name,address,city,state,zip,phone_no,email]");
+        		String detail = read.readLine();
+        		updateContact(addressBookName, name,detail);
         	}else {
-        		System.out.println("Exited AddressBook application");
         		break;
         	}
         }
