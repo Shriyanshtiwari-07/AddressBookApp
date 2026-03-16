@@ -1,5 +1,6 @@
 package com.addressBook.apps;
 
+
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -13,7 +14,7 @@ import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import com.addressBook.apps.model.Contacts;
+import com.addressBook.apps.Contacts;
 import com.addressBook.database.SQLOperation;
 import com.google.gson.Gson;
 import com.opencsv.CSVReader;
@@ -179,18 +180,18 @@ public class AddressBook {
 	    	}
 	    }
 	    public  void update(String name ,String s) {
-	    	String[] arr = s.split(":");
+	    	String[] arr = s.split(",");
 	    	if(arr.length!=8) {
 	    		throw new IllegalArgumentException("Invalid Input");
 	    	}
 	    	
 	    	Contacts temp = new Contacts(arr[0], arr[1],arr[2],arr[3],arr[4],Integer.parseInt(arr[5]),arr[6],arr[7]);
-	    	
+	    	UpdateDetails(name, temp);
 	    	for(Contacts c: contacts) {
-	    		if((name).equalsIgnoreCase(c.getFirstName()+" "+c.getLastName())) {
+	    		if((name).equalsIgnoreCase(c.getFirstName())) {
 	    			
-	    			mapByName.remove(c.getFirstName()+" "+c.getLastName());
-	    			mapByName.put(temp.getFirstName()+" "+temp.getLastName(),temp);
+	    			mapByName.remove(c.getFirstName());
+	    			mapByName.put(temp.getFirstName(),temp);
 	    			 String key =c.getCity().toLowerCase();
 	    			 List<Contacts> city1 = mapByCity.get(key);
 	                 city1.remove(c);
@@ -241,7 +242,7 @@ public class AddressBook {
 	    	}
 	    	
 	    	Contacts temp = new Contacts(arr[0], arr[1],arr[2],arr[3],arr[4],Integer.parseInt(arr[5]),arr[6],arr[7]);
-	    	
+	    	UpdateDetails(name, temp);
 	    	for(Contacts c: contacts) {
 	    		if((name).equalsIgnoreCase(c.getFirstName()+" "+c.getLastName())) {
 	    			
@@ -412,4 +413,11 @@ public class AddressBook {
 		  }
 		  return null;
 	  }
-}
+	  public void UpdateDetails(String name ,Contacts contacts) {
+		  try {
+			  SQLOperation.UpdateDetailInDatabase(name, contacts);
+		  }catch(Exception e) {
+			  System.out.println(e.getMessage());
+		  }
+	  }
+}}
