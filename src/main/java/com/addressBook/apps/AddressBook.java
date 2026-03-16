@@ -1,5 +1,6 @@
 package com.addressBook.apps;
 
+
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -427,5 +428,12 @@ public class AddressBook {
 			  System.out.println(e.getMessage());
 		  }
 		  return null;
+	  }
+	  
+	  public Map<String,Integer> getContactCountByCity(){
+		  return SQLOperation.countContactsByCity();
+	  }
+	  public Map<String,Integer> getContactCountByState(){
+		  return SQLOperation.countContactsByState();
 	  }
 }
